@@ -20,7 +20,7 @@ class BaseModel:
 
     def save(self):
         self.updated_at = datetime.now()
-        storage.save()
+        FileStorage.save()
 
     def to_dict(self):
         class_name = self.__class__.__name__
