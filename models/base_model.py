@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from models.engine.file_storage import FileStorage
+
 import uuid
 from datetime import datetime
 
@@ -22,9 +22,11 @@ class BaseModel:
         Updates the public instance attribute updated_at with the current datetime
         """
         self.updated_at = datetime.now()
-        FileStorage().save(self)
 
     def to_dict(self):
+        """
+        Returns a dictionary containing all keys/values of __dict__ of the instance
+        """
         class_name = self.__class__.__name__
         dict_representation = self.__dict__.copy()
         dict_representation['__class__'] = class_name
@@ -33,5 +35,8 @@ class BaseModel:
         return dict_representation
 
     def __str__(self):
+        """
+        Returns a string representation of the instance
+        """
         class_name = self.__class__.__name__
         return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
