@@ -41,7 +41,7 @@ class FileStorage:
         obj_dict = {key: obj.to_dict() for key, obj in self.__objects.items()}
         with open(self.__file_path, 'w', encoding='utf-8') as file:
             json.dump(obj_dict, file)
-
+    
     def reload(self):
         """
         Reload objects from a JSON file.
@@ -52,7 +52,10 @@ class FileStorage:
                 for key, obj_data in obj_dict.items():
                     class_name, obj_id = key.split('.')
                     module_name = f"models.{class_name.lower()}"
-                    class_obj = getattr(__import__(module_name, fromlist=[class_name]), class_name)
-                    obj_instance = class_obj(**obj_data)
-                    self.__objects[key] = obj_instance
+                    if class_name == 'BaseModel':
+                        module_name = "models.base_model"
+                        class_obj = getattr(__import__(module_name, fromlist=[class_name]), class_name)
+                        obj_instance = class_obj(**obj_data)
+                        self.__objects[key] = obj_instance
+
 
