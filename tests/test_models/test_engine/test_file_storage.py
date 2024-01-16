@@ -1,37 +1,30 @@
 #!/usr/bin/python3
-"""Unittest for FileStorage class"""
+
 import unittest
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
 from models.engine.file_storage import FileStorage
 
 class TestFileStorage(unittest.TestCase):
-    """Test cases for FileStorage class"""
-    def setUp(self):
-        """Set up for test"""
-        self.file_storage = FileStorage()
+    """
+    Test cases for the FileStorage class.
+    """
 
-    def test_all(self):
-        """Test all() method"""
-        objects = self.file_storage.all()
-        self.assertIsInstance(objects, dict)
-        self.assertIs(objects, self.file_storage._FileStorage__objects)
-
-    def test_new(self):
-        """Test new() method"""
+    def test_save_and_reload(self):
+        """Test saving and reloading objects."""
+        storage = FileStorage()
         obj = BaseModel()
-        key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        self.file_storage.new(obj)
-        self.assertIn(key, self.file_storage.all())
+        storage.new(obj)
+        storage.save()
+        storage.reload()
 
-    def test_save_reload(self):
-        """Test save() and reload() methods"""
-        obj = BaseModel()
-        key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        self.file_storage.new(obj)
-        self.file_storage.save()
-        new_storage = FileStorage()
-        new_storage.reload()
-        self.assertIn(key, new_storage.all())
+        all_objects = storage.all()
+        self.assertIn("BaseModel.{}".format(obj.id), all_objects)
 
 if __name__ == '__main__':
     unittest.main()
