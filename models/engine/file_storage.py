@@ -35,7 +35,7 @@ class FileStorage:
         self.__objects[key] = obj
 
     def save(self):
-        i"""
+        """
         Save the current serialized objects to the JSON file
         """
         if obj:
