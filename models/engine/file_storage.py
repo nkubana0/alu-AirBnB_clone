@@ -55,3 +55,4 @@ class FileStorage:
                     class_obj = getattr(__import__(module_name, fromlist=[class_name]), class_name)
                     obj_instance = class_obj(**obj_data)
                     self.__objects[key] = obj_instance
+
