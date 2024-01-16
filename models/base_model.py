@@ -16,7 +16,6 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            FileStorage.new(self)
 
     def save(self):
         self.updated_at = datetime.now()
