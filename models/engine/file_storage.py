@@ -41,9 +41,10 @@ class FileStorage:
         if obj:
             key = "{}.{}".format(obj.__class__.__name__, obj.id)
             self.__objects[key] = obj
-        obj_dict = {key: obj.to_dict() for key, obj in self.__objects.items()}
-        with open(self.__file_path, 'w', encoding='utf-8') as file:
-            json.dump(obj_dict, file)
+        else:
+            obj_dict = {key: obj.to_dict() for key, obj in self.__objects.items()}
+            with open(self.__file_path, 'w', encoding='utf-8') as file:
+                json.dump(obj_dict, file)
     
     def reload(self):
         """
