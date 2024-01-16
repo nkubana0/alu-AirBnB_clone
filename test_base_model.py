@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-
-import sys
 from models.base_model import BaseModel
 
 my_model = BaseModel()
