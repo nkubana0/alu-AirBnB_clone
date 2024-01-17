@@ -1,14 +1,40 @@
 #!/usr/bin/python3
-from models.base_model import BaseModel
 
-my_model = BaseModel()
-my_model.name = "My First Model"
-my_model.my_number = 89
-print(my_model)
-my_model.save()
-print(my_model)
-my_model_json = my_model.to_dict()
-print(my_model_json)
-print("JSON of my_model:")
-for key in my_model_json.keys():
-    print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key]))
+import unittest
+from models.base_model import BaseModel
+from datetime import datetime
+
+class TestBaseModel(unittest.TestCase):
+    def test_create_instance(self):
+        obj = BaseModel()
+        self.assertIsInstance(obj, BaseModel)
+
+    def test_id_generation(self):
+        obj1 = BaseModel()
+        obj2 = BaseModel()
+        self.assertNotEqual(obj1.id, obj2.id)
+
+    def test_timestamps(self):
+        obj = BaseModel()
+        self.assertIsInstance(obj.created_at, datetime)
+        self.assertIsInstance(obj.updated_at, datetime)
+        self.assertEqual(obj.created_at, obj.updated_at)
+
+    def test_to_dict_method(self):
+        obj = BaseModel()
+        obj_dict = obj.to_dict()
+        self.assertIsInstance(obj_dict, dict)
+        self.assertEqual(obj_dict['_class_'], 'BaseModel')
+        self.assertIsInstance(obj_dict['created_at'], str)
+        self.assertIsInstance(obj_dict['updated_at'], str)
+
+    def test_from_dict_method(self):
+        obj = BaseModel()
+        obj_dict = obj.to_dict()
+        new_obj = BaseModel(**obj_dict)
+        self.assertEqual(obj.id, new_obj.id)
+        self.assertEqual(obj.created_at, new_obj.created_at)
+        self.assertEqual(obj.updated_at, new_obj.updated_at)
+
+if __name__ == '__main__':
+    unittest.main()
