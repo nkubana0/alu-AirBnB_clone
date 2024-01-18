@@ -1,4 +1,3 @@
-```markdown
 # AirBnB Clone Project
 
 ## Project Description
