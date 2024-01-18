@@ -1,5 +1,3 @@
-Certainly! Here's a template for your README.md file that you can use on GitHub:
-
 ```markdown
 # AirBnB Clone Project
 
@@ -46,14 +44,7 @@ $ echo "update User 1234-5678-9012 email 'user@example.com'" | ./console.py
 
 The following individuals have contributed to the development of this project:
 
-- [Author 1](https://github.com/author1)
-- [Author 2](https://github.com/author2)
-- ...
-
-## Branches and Pull Requests
-
-We use branches and pull requests on GitHub to organize our work efficiently. Each feature or bug fix is developed on a separate branch before being merged into the main branch. This helps maintain a clean and organized codebase.
+- [Shema Ivan]
+- [Munezero Eliane]
 
 ---
-
-Feel free to customize the README.md file further based on the specific details of your project and your team's preferences.
