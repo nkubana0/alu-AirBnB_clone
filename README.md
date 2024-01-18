@@ -36,6 +36,8 @@ $ echo "update User 1234-5678-9012 email 'user@example.com'" | ./console.py
 Authors
 The following individuals have contributed to the development of this project:
 
-Shema Ivan
-Munezero Eliane
+Author 1
+Author 2
 ...
+Branches and Pull Requests
+We use branches and pull requests on GitHub to organize our work efficiently. Each feature or bug fix is developed on a separate branch before being merged into the main branch. This helps maintain a clean and organized codebase.
