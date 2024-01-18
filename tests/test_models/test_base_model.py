@@ -3,6 +3,11 @@ from models.base_model import BaseModel
 from datetime import datetime
 
 class TestBaseModel(unittest.TestCase):
+    def __init__(self):
+        current_datetime = datetime.noe()
+        self.created_at = current_datetime
+        self.updated_at = current_datetime
+
         def test_create_instance(self):
             obj = BaseModel()
             self.assertIsInstance(obj, BaseModel)

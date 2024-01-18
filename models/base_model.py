@@ -27,11 +27,11 @@ class BaseModel:
         """
         Returns a dictionary containing all keys/values of __dict__ of the instance
         """
-        class_name = self.__class__.__name__
-        dict_representation = self.__dict__.copy()
-        dict_representation['__class__'] = class_name
-        dict_representation['created_at'] = self.created_at.isoformat()
-        dict_representation['updated_at'] = self.updated_at.isoformat()
+        __class__ : self.__class__.__name__
+        dict_representation : self.__dict__.copy()
+        dict_representation['__class__'] : class_name
+        dict_representation['created_at'] : self.created_at.isoformat()
+        dict_representation['updated_at'] : self.updated_at.isoformat()
         return dict_representation
 
     def __str__(self):
