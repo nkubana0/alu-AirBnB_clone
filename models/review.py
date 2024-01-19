@@ -11,6 +11,7 @@ class Review(BaseModel):
         super().__init__(*args, **kwargs)
         # Add any additional attributes specific to the Review class here
         self.text = kwargs.get('text', '')  # Add any default value for the text attribute
+        self.user_id = kwargs.get('user_id', '')  # Add any default value for the user_id attribute
         # Set created_at and updated_at if not provided in kwargs
         if 'created_at' not in kwargs:
             self.created_at = datetime.utcnow()
@@ -22,6 +23,7 @@ class Review(BaseModel):
         obj_dict = super().to_dict()
         # Add any specific attributes from Review class to the dictionary here
         obj_dict['text'] = self.text
+        obj_dict['user_id'] = self.user_id
         return obj_dict
 
     # Add any specific methods for the Review class here
