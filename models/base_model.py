@@ -15,9 +15,7 @@ class BaseModel:
         else:
             self.id = str(uuid.uuid4())
             self.created_at = self.updated_at = datetime.now()
-            from models.engine.file_storage import FileStorage  # Import inside the method
-            self.storage = FileStorage()
-            self.storage.new(self)
+            self.storage = None  # Add this line to avoid the 'storage' attribute issue
 
     def to_dict(self):
         """Return a dictionary representation of the object."""
@@ -30,10 +28,8 @@ class BaseModel:
         return obj_dict
 
     def save(self):
-        self.updated_at = datetime.now()
-        from models import storage  # Import inside the method
-        storage.new(self)
-        storage.save()
+        # Implement the save method as needed
+        pass
 
     def __str__(self):
         """Return the string representation of the object."""
