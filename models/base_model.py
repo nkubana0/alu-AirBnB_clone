@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 import uuid
 from datetime import datetime
 
@@ -14,7 +15,9 @@ class BaseModel:
         else:
             self.id = str(uuid.uuid4())
             self.created_at = self.updated_at = datetime.now()
-            storage.new(self)
+            from models.engine.file_storage import FileStorage  # Import inside the method
+            self.storage = FileStorage()
+            self.storage.new(self)
 
     def to_dict(self):
         """Return a dictionary representation of the object."""
@@ -27,8 +30,9 @@ class BaseModel:
         return obj_dict
 
     def save(self):
-        """Save the object and call save(self) method of storage."""
         self.updated_at = datetime.now()
+        from models import storage  # Import inside the method
+        storage.new(self)
         storage.save()
 
     def __str__(self):
@@ -36,5 +40,3 @@ class BaseModel:
         return "[{}] ({}) {}".format(
             self.__class__.__name__, self.id, self.to_dict()
         )
-
-from models import storage
