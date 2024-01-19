@@ -13,10 +13,9 @@ class TestBaseModel(unittest.TestCase):
 
         # Check if the relevant information is present in the string representation
         self.assertIn(base_model.id, str_representation)
-        self.assertIn(str(base_model.created_at), str_representation)
-        self.assertIn(str(base_model.updated_at), str_representation)
+        self.assertIn(base_model.created_at.strftime('%Y-%m-%dT%H:%M:%S.%f'), str_representation)
+        self.assertIn(base_model.updated_at.strftime('%Y-%m-%dT%H:%M:%S.%f'), str_representation)
         self.assertIn(base_model.__class__.__name__, str_representation)
 
 if __name__ == '__main__':
     unittest.main()
-
