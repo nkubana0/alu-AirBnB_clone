@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+
 from models.base_model import BaseModel
 from datetime import datetime
 
@@ -27,6 +28,11 @@ class Review(BaseModel):
         obj_dict['user_id'] = self.user_id
         obj_dict['place_id'] = self.place_id
         return obj_dict
+
+    @classmethod
+    def from_dict(cls, obj_dict):
+        """Create a Review instance from a dictionary."""
+        return cls(**obj_dict)
 
     # Add any specific methods for the Review class here
 
@@ -59,4 +65,3 @@ class Review(BaseModel):
     def updated_at(self, value):
         """Setter method for the 'updated_at' attribute."""
         self.__dict__['updated_at'] = value
-
