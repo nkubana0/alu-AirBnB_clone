@@ -3,6 +3,8 @@
 from datetime import datetime
 import uuid
 from models import storage
+from models.user import User
+from models.state import State
 
 class BaseModel:
     def __init__(self, **kwargs):
