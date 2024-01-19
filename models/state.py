@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 
-# models/state.py
-
 from models.base_model import BaseModel
 
 class State(BaseModel):
@@ -23,9 +21,9 @@ class State(BaseModel):
     @property
     def id(self):
         """Getter method for the 'id' attribute."""
-        return self._id
+        return self.__dict__.get('id')
 
     @id.setter
     def id(self, value):
         """Setter method for the 'id' attribute."""
-        self._id = value
+        self.__dict__['id'] = value
