@@ -1,4 +1,4 @@
-# models/state.py
+#!/usr/bin/python3
 
 from models.base_model import BaseModel
 from datetime import datetime
@@ -23,6 +23,12 @@ class State(BaseModel):
         # Add any specific attributes from State class to the dictionary here
         obj_dict['name'] = self.name
         return obj_dict
+
+    @classmethod
+    def from_dict(cls, obj_dict):
+        """Create a new State instance from a dictionary."""
+        # Add any specific logic to create a State instance from the dictionary here
+        return cls(**obj_dict)
 
     # Add any specific methods for the State class here
 
@@ -55,7 +61,3 @@ class State(BaseModel):
     def updated_at(self, value):
         """Setter method for the 'updated_at' attribute."""
         self.__dict__['updated_at'] = value
-
-# Now try to create a new State instance and check if the to_dict method works
-state = State(name='California')
-state_dict = state.to_dict()
