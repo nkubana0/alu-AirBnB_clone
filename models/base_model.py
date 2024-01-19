@@ -2,7 +2,9 @@
 """Module for BaseModel class"""
 import uuid
 from datetime import datetime
-from models.engine.file_storage import FileStorage
+from models import init_storage
+
+storage = init_storage()
 
 class BaseModel:
     """Defines the BaseModel class"""
