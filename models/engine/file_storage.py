@@ -28,13 +28,14 @@ class FileStorage:
             json.dump(data, file)
 
     def reload(self):
-        try:
-            with open(self.__file_path, 'r') as file:
-                data = json.load(file)
-                for key, value in data.items():
-                    class_name, obj_id = key.split('.')
+    try:
+        with open(self.__file_path, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+            for key, value in data.items():
+                class_name = key.split('.')[0]
+                if class_name in globals():
                     cls = globals()[class_name]
-                    obj = cls(**value)
-                    self.new(obj)
-        except FileNotFoundError:
-            pass
+                    instance = cls(**value)
+                    self.__objects[key] = instance
+    except FileNotFoundError:
+        pass
