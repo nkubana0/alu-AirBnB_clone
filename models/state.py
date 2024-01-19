@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+# models/state.py
 
 from models.base_model import BaseModel
 from datetime import datetime
@@ -50,3 +50,10 @@ class State(BaseModel):
     def updated_at(self, value):
         """Setter method for the 'updated_at' attribute."""
         self.__dict__['updated_at'] = value
+
+# Create an instance of the State class with a valid created_at value
+state = State()
+state.created_at = datetime.utcnow()
+
+# Now you should be able to use the to_dict method without errors
+state_dict = state.to_dict()
