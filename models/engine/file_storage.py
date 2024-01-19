@@ -23,14 +23,12 @@ class FileStorage:
         with open(self.__file_path, 'w') as file:
             json.dump(data, file)
 
-    def reload(self):
-        """Deserializes the JSON file to __objects."""
         try:
             with open(self.__file_path, 'r') as file:
                 data = json.load(file)
                 for key, value in data.items():
                     class_name, obj_id = key.split('.')
-                    # Import BaseModel here to avoid circular import
+                    # Move the import statement to the reload method
                     from models.base_model import BaseModel
                     cls = globals()[class_name]
                     obj = cls(**value)
