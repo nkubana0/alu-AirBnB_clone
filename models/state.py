@@ -3,13 +3,13 @@
 from models.base_model import BaseModel
 
 class State(BaseModel):
-    """State class."""
-    def __init__(self, name="", **kwargs):
-        super().__init__(**kwargs)
-        self.name = name
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.name = kwargs.get('name', '')  # Add other State-specific attributes here if needed
 
-    @classmethod
-    def from_dict(cls, obj_dict):
-        """Create a State instance from a dictionary."""
-        state_instance = cls(**obj_dict)
-        return state_instance
+    def to_dict(self):
+        """Return a dictionary representation of the object."""
+        obj_dict = super().to_dict()
+        obj_dict['name'] = self.name  # Make sure to include 'name' if it exists
+        # Add other State-specific attributes here if needed
+        return obj_dict
