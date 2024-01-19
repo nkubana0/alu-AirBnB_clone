@@ -2,13 +2,15 @@
 
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State]
 
 classes = {
-    'BaseModel': BaseModel,  # Add other classes as needed
+    'BaseModel': BaseModel,
     'User': User,
     'State': State,
-    # Add more classes as needed
 }
 
 storage = FileStorage()
 storage.reload()
+
