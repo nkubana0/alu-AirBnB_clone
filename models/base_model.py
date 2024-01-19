@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import uuid
 from datetime import datetime
-from models import storage
 
 class BaseModel:
     def __init__(self, *args, **kwargs):
@@ -37,3 +36,5 @@ class BaseModel:
         return "[{}] ({}) {}".format(
             self.__class__.__name__, self.id, self.to_dict()
         )
+
+from models import storage
