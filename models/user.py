@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import uuid
 from datetime import datetime
 
@@ -23,3 +25,8 @@ class User:
             'updated_at': self.updated_at.isoformat()
         }
         return user_dict
+
+    @classmethod
+    def from_dict(cls, user_dict):
+        # Assuming the structure of the dictionary is compatible with the __init__ method
+        return cls(**user_dict)
