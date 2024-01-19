@@ -11,6 +11,11 @@ class State(BaseModel):
         super().__init__(*args, **kwargs)
         # Add any additional attributes specific to the State class here
         self.name = kwargs.get('name', '')  # Add any default value for the name attribute
+        # Set created_at and updated_at if not provided in kwargs
+        if 'created_at' not in kwargs:
+            self.created_at = datetime.utcnow()
+        if 'updated_at' not in kwargs:
+            self.updated_at = datetime.utcnow()
 
     def to_dict(self):
         """Return a dictionary representation of the State object."""
@@ -51,9 +56,6 @@ class State(BaseModel):
         """Setter method for the 'updated_at' attribute."""
         self.__dict__['updated_at'] = value
 
-# Create an instance of the State class with a valid created_at value
-state = State()
-state.created_at = datetime.utcnow()
-
-# Now you should be able to use the to_dict method without errors
+# Now try to create a new State instance and check if the to_dict method works
+state = State(name='California')
 state_dict = state.to_dict()
