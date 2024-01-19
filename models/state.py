@@ -3,12 +3,13 @@
 from models.base_model import BaseModel
 
 class State(BaseModel):
+    """State class that inherits from BaseModel."""
+    
     def __init__(self, *args, **kwargs):
+        """Initialize State instance."""
         super().__init__(*args, **kwargs)
-        self.name = kwargs.get('name', '')  # Add other State-specific attributes here if needed
 
     def to_dict(self):
-        """Return a dictionary representation of the object."""
+        """Return a dictionary representation of the State object."""
         obj_dict = super().to_dict()
-        obj_dict['name'] = self.name
         return obj_dict
