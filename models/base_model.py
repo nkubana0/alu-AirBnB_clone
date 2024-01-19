@@ -1,38 +1,33 @@
 #!/usr/bin/python3
 
-import uuid
 from datetime import datetime
+import uuid
+
 
 class BaseModel:
-    def __init__(self, *args, **kwargs):
-        if kwargs:
-            for key, value in kwargs.items():
-                if key == '__class__':
-                    continue
-                if key == 'created_at' or key == 'updated_at':
-                    value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
+    def __init__(self, **kwargs):
+        self.id = str(uuid.uuid4())
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
+
+        for key, value in kwargs.items():
+            if key in ["created_at", "updated_at"]:
+                if isinstance(value, str):
+                    setattr(self, key, datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
+                else:
+                    setattr(self, key, value)
+            else:
                 setattr(self, key, value)
-        else:
-            self.id = str(uuid.uuid4())
-            self.created_at = self.updated_at = datetime.now()
-            self.storage = None  # Add this line to avoid the 'storage' attribute issue
 
     def to_dict(self):
-        """Return a dictionary representation of the object."""
-        obj_dict = {
-            '__class__': self.__class__.__name__,
-            'id': self.id,
-            'created_at': self.created_at.isoformat(),
-            'updated_at': self.updated_at.isoformat()
-        }
+        obj_dict = self.__dict__.copy()
+        obj_dict["created_at"] = self.created_at.isoformat()
+        obj_dict["updated_at"] = self.updated_at.isoformat()
+        obj_dict["__class__"] = self.__class__.__name__
         return obj_dict
 
-    def save(self):
-        # Implement the save method as needed
-        pass
-
     def __str__(self):
-        """Return the string representation of the object."""
         return "[{}] ({}) {}".format(
-            self.__class__.__name__, self.id, self.to_dict()
+            self.__class__.__name__, self.id, str(self.__dict__)
         )
+
