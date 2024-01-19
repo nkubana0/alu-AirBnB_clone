@@ -1,8 +1,6 @@
 #!/usr/bin/python3
-
+"""Module for FileStorage class"""
 import json
-from models.base_model import BaseModel
-from os import path
 
 class FileStorage:
     """Serializes instances to a JSON file and deserializes JSON file to instances"""
@@ -37,3 +35,6 @@ class FileStorage:
                     self.__objects[key] = obj_instance
         except FileNotFoundError:
             pass
+
+storage = FileStorage()
+storage.reload()
