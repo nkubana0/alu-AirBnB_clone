@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import uuid
 from datetime import datetime
-from models import storage  # Import at the beginning of the file
+from models import storage
 
 class BaseModel:
     def __init__(self, *args, **kwargs):
@@ -28,6 +28,7 @@ class BaseModel:
         return obj_dict
 
     def save(self):
+        """Save the object and call save(self) method of storage."""
         self.updated_at = datetime.now()
         storage.save()
 
