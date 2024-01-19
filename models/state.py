@@ -44,4 +44,9 @@ class State(BaseModel):
     @property
     def updated_at(self):
         """Getter method for the 'updated_at' attribute."""
-        return self.__dict__.get('up
+        return self.__dict__.get('updated_at')
+
+    @updated_at.setter
+    def updated_at(self, value):
+        """Setter method for the 'updated_at' attribute."""
+        self.__dict__['updated_at'] = value
