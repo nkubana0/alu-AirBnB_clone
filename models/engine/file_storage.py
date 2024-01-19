@@ -1,5 +1,7 @@
 #!/usr/bin/python3
+
 import json
+import os
 
 class FileStorage:
     __file_path = "file.json"
@@ -16,6 +18,11 @@ class FileStorage:
         data = {}
         for key, obj in self.__objects.items():
             data[key] = obj.to_dict()
+
+        # Exclude FileStorage instance from data
+        if 'FileStorage.' + str(id(self)) in data:
+            del data['FileStorage.' + str(id(self))]
+
         with open(self.__file_path, 'w') as file:
             json.dump(data, file)
 
@@ -30,3 +37,7 @@ class FileStorage:
                     self.new(obj)
         except FileNotFoundError:
             pass
+
+# Create a unique FileStorage instance for the application
+storage = FileStorage()
+storage.reload()

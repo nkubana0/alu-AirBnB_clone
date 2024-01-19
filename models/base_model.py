@@ -1,7 +1,7 @@
 #!/usr/bin/python3
+
 import uuid
 from datetime import datetime
-from models import storage
 
 class BaseModel:
     def __init__(self, *args, **kwargs):
@@ -15,20 +15,26 @@ class BaseModel:
         else:
             self.id = str(uuid.uuid4())
             self.created_at = self.updated_at = datetime.now()
-            storage.new(self)
+            from models.engine.file_storage import FileStorage  # Import inside the method
+            self.storage = FileStorage()
+            self.storage.new(self)
 
     def to_dict(self):
-        dictionary = self.__dict__.copy()
-        dictionary['created_at'] = self.created_at.isoformat()
-        dictionary['updated_at'] = self.updated_at.isoformat()
-        dictionary['__class__'] = self.__class__.__name__
-        return dictionary
+        """Return a dictionary representation of the object."""
+        obj_dict = {
+            '__class__': self.__class__.__name__,
+            'id': self.id,
+            'created_at': self.created_at.isoformat(),
+            'updated_at': self.updated_at.isoformat()
+        }
+        return obj_dict
 
     def save(self):
         self.updated_at = datetime.now()
-        storage.save()
+        self.storage.save()
 
     def __str__(self):
+        """Return the string representation of the object."""
         return "[{}] ({}) {}".format(
             self.__class__.__name__, self.id, self.to_dict()
         )
