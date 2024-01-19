@@ -24,8 +24,7 @@ class BaseModel:
         obj_dict["updated_at"] = self.updated_at.isoformat()
         obj_dict["__class__"] = self.__class__.__name__
         return obj_dict
-
+    
     def __str__(self):
-        return "[{}] ({}) {}".format(
-            self.__class__.__name__, self.id, str(self.to_dict())[:-1]
-        )
+        class_name = self.__class__.__name__
+        return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
