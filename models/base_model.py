@@ -27,4 +27,8 @@ class BaseModel:
     
     def __str__(self):
         class_name = self.__class__.__name__
-        return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
+        created_at_str = self.created_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
+        updated_at_str = self.updated_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
+        return "[{}] ({}) {{'id': '{}', 'created_at': '{}', 'updated_at': '{}'}}".format(
+            class_name, self.id, self.id, created_at_str, updated_at_str
+        )
