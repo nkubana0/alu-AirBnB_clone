@@ -13,7 +13,7 @@ class BaseModel:
         for key, value in kwargs.items():
             if key in ["created_at", "updated_at"]:
                 if isinstance(value, str):
-                    setattr(self, key, datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
+                    setattr(self, key, datetime.fromisoformat(value))
                 else:
                     setattr(self, key, value)
             else:
@@ -28,5 +28,5 @@ class BaseModel:
 
     def __str__(self):
         return "[{}] ({}) {}".format(
-            self.__class__.__name__, self.id, str(self.__dict__)
+            self.__class__.__name__, self.id, str(self.to_dict())
         )
