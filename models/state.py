@@ -10,6 +10,5 @@ class State(BaseModel):
     def to_dict(self):
         """Return a dictionary representation of the object."""
         obj_dict = super().to_dict()
-        obj_dict['name'] = self.name  # Make sure to include 'name' if it exists
-        # Add other State-specific attributes here if needed
+        obj_dict['name'] = self.name
         return obj_dict
