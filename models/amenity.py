@@ -1,15 +1,18 @@
 #!/usr/bin/python3
 
-from models.base_model import BaseModel
+import unittest
+from models.amenity import Amenity
 
-class Amenity(BaseModel):
-    """Amenity class."""
-    def __init__(self, name="", **kwargs):
-        super().__init__(**kwargs)
-        self.name = name
+class TestAmenity(unittest.TestCase):
+    def test_to_dict(self):
+        amenity = Amenity(name='WiFi')  # Replace with your Amenity instance creation
+        amenity_dict = amenity.to_dict()
 
-    @classmethod
-    def from_dict(cls, obj_dict):
-        """Create an Amenity instance from a dictionary."""
-        amenity_instance = cls(**obj_dict)
-        return amenity_instance
+        # Check if the expected keys are present in the dictionary
+        self.assertIn('name', amenity_dict)
+        self.assertIn('__class__', amenity_dict)
+
+        # Additional assertions based on your Amenity class attributes
+
+if __name__ == '__main__':
+    unittest.main()
