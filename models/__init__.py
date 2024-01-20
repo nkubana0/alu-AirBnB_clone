@@ -1,14 +1,24 @@
 #!/usr/bin/python3
 
 from models.engine.file_storage import FileStorage
-
-storage = FileStorage()
-
-# Import the classes after initializing storage
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
 from models.review import Review
-# Add other imports as needed
 
+classes = {
+    'BaseModel': BaseModel,
+    'User': User,
+    'State': State,
+    'City': City,
+    'Place': Place,
+    'Amenity': Amenity,
+    'Review': Review,
+    # Add more classes as needed
+}
+
+storage = FileStorage()
 storage.reload()
