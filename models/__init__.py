@@ -17,7 +17,6 @@ classes = {
     'Place': Place,
     'Amenity': Amenity,
     'Review': Review,
-    # Add more classes as needed
 }
 
 storage = FileStorage()
