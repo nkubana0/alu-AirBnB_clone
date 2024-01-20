@@ -1,32 +1,33 @@
 #!/usr/bin/python3
+"""
+This module contains the User class (Blueprint for creating user objects).
+"""
 
-import uuid
-from datetime import datetime
+from models.base_model import BaseModel
 
-class User:
-    def __init__(self, email, password, first_name=None, last_name=None, *args, **kwargs):
-        self.id = str(uuid.uuid4())
-        self.email = email
-        self.password = password
-        self.first_name = first_name
-        self.last_name = last_name
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
 
-    def to_dict(self):
-        user_dict = {
-            '__class__': self.__class__.__name__,
-            'id': self.id,
-            'email': self.email,
-            'password': self.password,
-            'first_name': self.first_name,
-            'last_name': self.last_name,
-            'created_at': self.created_at.isoformat(),
-            'updated_at': self.updated_at.isoformat()
-        }
-        return user_dict
+class User(BaseModel):
+    """
+    This is the user class.
 
-    @classmethod
-    def from_dict(cls, user_dict):
-        # Assuming the structure of the dictionary is compatible with the __init__ method
-        return cls(**user_dict)
+    Attributes:
+        email (str): The email address of the user.
+        password (str): The password of the user.
+        first_name (str): The first name of the user.
+        last_name (str): The last name of the user.
+    """
+    email = ""
+    password = ""
+    first_name = ""
+    last_name = ""
+
+    def __init__(self, *args, **kwargs):
+        """
+        Initialize public instance attributes.
+        """
+        super().__init__(*args, **kwargs)
+
+        # self.email = User.email
+        # self.password = User.password
+        # self.first_name = User.first_name
+        # self.last_name = User.last_name
