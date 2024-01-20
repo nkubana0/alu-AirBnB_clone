@@ -32,3 +32,12 @@ class BaseModel:
         return "[{}] ({}) {{'id': '{}', 'created_at': '{}', 'updated_at': '{}'}}".format(
             class_name, self.id, self.id, created_at_str, updated_at_str
         )
+    
+    def save(self):
+        """Save the current instance to the JSON file."""
+        models.storage.new(self)
+        models.storage.save()
+
+    def reload(self):
+        """Reload instances from the JSON file."""
+        models.storage.reload()
