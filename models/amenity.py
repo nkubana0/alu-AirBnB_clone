@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import unittest
+from models.amenity import Amenity  # Import Amenity from the correct location
 
 class TestAmenity(unittest.TestCase):
     def test_to_dict(self):
