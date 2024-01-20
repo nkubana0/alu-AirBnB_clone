@@ -33,6 +33,8 @@ class FileStorage:
                     cls = getattr(models, cls_name, None)
 
                     if cls:
+                        # Remove the '__class__' key from the value dictionary
+                        del value['__class__']
                         instance = cls(**value)
                         models.storage.new(instance)
 
