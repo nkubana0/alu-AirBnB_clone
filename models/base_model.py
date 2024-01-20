@@ -2,6 +2,7 @@
 
 from datetime import datetime
 import uuid
+from models import storage  # Import the storage variable
 
 class BaseModel:
     def __init__(self, **kwargs):
@@ -17,6 +18,9 @@ class BaseModel:
                     setattr(self, key, value)
             else:
                 setattr(self, key, value)
+
+        if not kwargs:  # If it's a new instance, call new(self) on storage
+            storage.new(self)
 
     def to_dict(self):
         obj_dict = self.__dict__.copy()
@@ -35,11 +39,8 @@ class BaseModel:
     
     def save(self):
         """Save the current instance to the JSON file."""
-        from models import storage
-        storage.new(self)
-        storage.save()
+        storage.save()  # Call save(self) method of storage
 
     def reload(self):
         """Reload instances from the JSON file."""
-        from models import storage
         storage.reload()
