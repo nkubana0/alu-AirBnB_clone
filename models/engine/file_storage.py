@@ -2,6 +2,10 @@
 
 import json
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.place import Place
+# Import other necessary classes
 
 class FileStorage:
     __file_path = "file.json"
@@ -23,17 +27,17 @@ class FileStorage:
 
     def reload(self):
         try:
-            with open(self.__file_path, 'r', encoding='utf-8') as file:
+            with open(FileStorage.__file_path, 'r', encoding='utf-8') as file:
                 obj_dict = json.load(file)
-                
+
             for key, value in obj_dict.items():
                 cls_name = value['__class__']
 
-            # Check if the class is defined
+                # Check if the class is defined
                 if cls_name in globals():
                     cls = globals()[cls_name]
                     instance = cls(**value)
                     self.new(instance)
-        
+
         except FileNotFoundError:
             pass
