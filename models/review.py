@@ -1,26 +1,20 @@
 #!/usr/bin/python3
 """
-This module contains Review class (Blueprint for creating Review objects).
+This module contains the State class (Blueprint for creating State objects).
 """
 
 from models.base_model import BaseModel
 
 
-class Review(BaseModel):
+class State(BaseModel):
     """
-    This is the review class
+    This is the state class
 
     Attributes:
-        place_id (str): The place id
-        user_id (str): The user id
-        text (str): The text of the review
+        name (str): The name of the state
     """
-    place_id = ""
-    user_id = ""
-    text = ""
+    name = ""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # self.place_id = Review.place_id
-        # self.user_id = Review.user_id
-        # self.text = Review.text
+        # self.name = State.name
