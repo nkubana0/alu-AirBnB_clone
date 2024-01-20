@@ -23,16 +23,16 @@ class FileStorage:
 
     def reload(self):
         try:
-            with open(FileStorage.__file_path, 'r', encoding='utf-8') as file:
+            with open(self.__file_path, 'r', encoding='utf-8') as file:
                 obj_dict = json.load(file)
-
+            
             for key, value in obj_dict.items():
                 cls_name = value['__class__']
                 cls = getattr(__import__('models'), cls_name)
-
+                
                 if cls:
                     instance = cls(**value)
-                    storage.new(instance)
-
+                    self.new(instance)
+        
         except FileNotFoundError:
             pass
