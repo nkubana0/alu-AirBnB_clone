@@ -2,7 +2,7 @@
 
 import json
 from models.base_model import BaseModel
-from models.__init__ import storage
+import models  # Import models module
 
 class FileStorage:
     __file_path = "file.json"
@@ -30,11 +30,11 @@ class FileStorage:
             for key, value in obj_dict.items():
                 cls_name = value.get('__class__')
                 if cls_name:
-                    cls = globals().get(cls_name)
+                    cls = getattr(models, cls_name, None)
 
                     if cls:
                         instance = cls(**value)
-                        storage.new(instance)
+                        models.storage.new(instance)
 
         except FileNotFoundError:
             pass
