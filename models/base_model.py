@@ -2,9 +2,6 @@
 
 from datetime import datetime
 import uuid
-from models import storage
-from models.user import User
-from models.state import State
 
 class BaseModel:
     def __init__(self, **kwargs):
@@ -35,3 +32,11 @@ class BaseModel:
         return "[{}] ({}) {{'id': '{}', 'created_at': '{}', 'updated_at': '{}'}}".format(
             class_name, self.id, self.id, created_at_str, updated_at_str
         )
+
+    def save(self):
+        from models import storage
+        storage.save()
+
+    def reload(self):
+        from models import storage
+        storage.reload()
