@@ -2,10 +2,6 @@
 
 import json
 from models.base_model import BaseModel
-from models.user import User
-from models.state import State
-from models.place import Place
-# Import other necessary classes
 
 class FileStorage:
     __file_path = "file.json"
@@ -32,10 +28,9 @@ class FileStorage:
 
             for key, value in obj_dict.items():
                 cls_name = value['__class__']
+                cls = getattr(__import__('models'), cls_name, None)
 
-                # Check if the class is defined
-                if cls_name in globals():
-                    cls = globals()[cls_name]
+                if cls:
                     instance = cls(**value)
                     self.new(instance)
 
