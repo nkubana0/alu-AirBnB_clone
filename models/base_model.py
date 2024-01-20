@@ -36,10 +36,10 @@ class BaseModel:
     def save(self):
         """Save the current instance to the JSON file."""
         from models import storage
-        models.storage.new(self)
-        models.storage.save()
+        storage.new(self)
+        storage.save()
 
     def reload(self):
         """Reload instances from the JSON file."""
         from models import storage
-        models.storage.reload()
+        storage.reload()
