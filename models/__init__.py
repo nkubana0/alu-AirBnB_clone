@@ -9,6 +9,7 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
+# Dictionary mapping class names to class objects
 classes = {
     'BaseModel': BaseModel,
     'User': User,
@@ -19,5 +20,8 @@ classes = {
     'Review': Review,
 }
 
+# Create a unique FileStorage instance for your application
 storage = FileStorage()
+
+# Call reload() method on this variable
 storage.reload()
