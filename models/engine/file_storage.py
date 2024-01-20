@@ -27,12 +27,13 @@ class FileStorage:
                 obj_dict = json.load(file)
 
             for key, value in obj_dict.items():
-                cls_name = value['__class__']
-                cls = getattr(__import__('models'), cls_name, None)
-
-                if cls:
-                    instance = cls(**value)
-                    self.new(instance)
+                cls_name = value.get('__class__')
+                if cls_name:
+                    cls = globals().get(cls_name)
+                    
+                    if cls:
+                        instance = cls(**value)
+                        storage.new(instance)
 
         except FileNotFoundError:
             pass
