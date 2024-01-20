@@ -25,12 +25,13 @@ class FileStorage:
         try:
             with open(self.__file_path, 'r', encoding='utf-8') as file:
                 obj_dict = json.load(file)
-            
+                
             for key, value in obj_dict.items():
                 cls_name = value['__class__']
-                cls = getattr(__import__('models'), cls_name)
-                
-                if cls:
+
+            # Check if the class is defined
+                if cls_name in globals():
+                    cls = globals()[cls_name]
                     instance = cls(**value)
                     self.new(instance)
         
