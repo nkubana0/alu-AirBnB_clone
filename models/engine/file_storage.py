@@ -2,6 +2,7 @@
 
 import json
 from models.base_model import BaseModel
+from models.__init__ import storage
 
 class FileStorage:
     __file_path = "file.json"
@@ -30,7 +31,7 @@ class FileStorage:
                 cls_name = value.get('__class__')
                 if cls_name:
                     cls = globals().get(cls_name)
-                    
+
                     if cls:
                         instance = cls(**value)
                         storage.new(instance)
